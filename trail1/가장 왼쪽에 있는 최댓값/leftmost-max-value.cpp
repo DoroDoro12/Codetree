@@ -18,19 +18,16 @@ int main() {
     int fin = n;
 
     while (1) {
-        int max = 0;
         int idx = 0;
-
         for (int i = 0; i < fin; i++) {
-            if (max < arr[i]) {
-                max = arr[i];
+            if (arr[idx] < arr[i]) {
                 idx = i;
             }
         }
 
+        cout << idx + 1 << " ";
         fin = idx;
-        cout << fin+1 << " ";
-        if (0 == idx) {
+        if (idx == 0) {
             break;
         }
     }
