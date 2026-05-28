@@ -1,25 +1,27 @@
 #include <iostream>
+
 using namespace std;
-bool IsLeapYear(int n) {
-    if (n % 4 != 0) {
+
+bool IsLeapYear(int y) {
+    if (y % 4 != 0) 
         return false;
-    }else {
-        if (n % 100 == 0 && n % 400 != 0) {
-            return false;
-        }
-    }
+    if (y % 100 != 0)
+        return true;
+    if (y % 400 != 0)
+        return false;
     return true;
 }
 
-int main() {
-    // Please write your code here.
-    int y;
-    cin >> y;
+int y;
 
+int main() {
+    cin >> y;
     if (IsLeapYear(y)) {
         cout << "true";
     }else {
         cout << "false";
     }
+    // Please write your code here.
+
     return 0;
 }
