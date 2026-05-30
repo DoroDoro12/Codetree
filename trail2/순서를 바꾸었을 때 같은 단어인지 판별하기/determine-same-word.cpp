@@ -1,0 +1,19 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    // Please write your code here.
+    string str1, str2;
+    cin >> str1 >> str2;
+
+    sort(str1.begin(), str1.end());
+    sort(str2.begin(), str2.end());
+
+    if (str1 == str2) {
+        cout << "Yes";
+    }else {
+        cout << "No";
+    }
+    return 0;
+}
