@@ -17,8 +17,6 @@ void Init() {
     y = n / 2;
     mv_cnt = 1;
     num = 1;
-    arr[x][y] = num;
-    num++;
 }
 
 void Turn() {
@@ -28,18 +26,21 @@ void Turn() {
     }
 }
 
+bool End() {
+    return (!InRange(x, y));
+}
+
+void Move() {
+    x = x + dx[dir];
+    y = y + dy[dir];
+}
+
 void Simulate() {
-    while (1) {
+    while (!End()) {
         for (int i = 0; i < mv_cnt; i++) {
-            int nx = x + dx[dir];
-            int ny = y + dy[dir];
-            if (!InRange(nx, ny)) {
-                return;
-            }
-            x = nx;
-            y = ny;
-            arr[x][y] = num;
-            num++;
+            arr[x][y] = num++;
+            Move();
+            if (End()) break;
         }
         Turn();
     }
