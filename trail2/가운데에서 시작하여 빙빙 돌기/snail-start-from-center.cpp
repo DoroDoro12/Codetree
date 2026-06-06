@@ -1,46 +1,55 @@
 #include <iostream>
 using namespace std;
-int n, x, y;
-int stt;
-int dir;
-int r;
-
-int dx[4] = {0, 1, 0, -1};
+int n;
+int x, y, dir;
+int num;
+int mv_cnt;
+int arr[100][100];
+int dx[4] = {0, -1, 0, 1};
 int dy[4] = {1, 0, -1, 0};
 
-int arr[100][100];
-
-bool Square(int x, int y) {
-    return (x >= stt-r && x <= stt+r && y >= stt-r && y <= stt+r);
+bool InRange(int x, int y) {
+    return (x >= 0 && x < n && y >= 0 && y < n);
 }
 
-int Pow(int x) {
-    return x*x;
+void Init() {
+    x = n / 2;
+    y = n / 2;
+    mv_cnt = 1;
+    num = 1;
+    arr[x][y] = num;
+    num++;
 }
 
-int main() {
-    // Please write your code here.
-    cin >> n;
-    x = n / 2; y = n / 2;
-    stt = x;
-    arr[x][y] = 1;
-    x += dx[dir];
-    y += dy[dir];
-    r = 1;
+void Turn() {
+    dir = (dir + 1) % 4;
+    if (dir == 0 || dir == 2) {
+        mv_cnt++;
+    }
+}
 
-    for (int i = 3; i <= n; i+=2) {
-        for (int j = Pow(i-2) + 1; j <= Pow(i); j++) {
-            arr[x][y] = j;
-            if (j == Pow(i)) r++;
+void Simulate() {
+    while (1) {
+        for (int i = 0; i < mv_cnt; i++) {
             int nx = x + dx[dir];
             int ny = y + dy[dir];
-            if (!Square(nx, ny)) {
-                dir = (dir + 3) % 4;
+            if (!InRange(nx, ny)) {
+                return;
             }
-            x += dx[dir];
-            y += dy[dir];
+            x = nx;
+            y = ny;
+            arr[x][y] = num;
+            num++;
         }
+        Turn();
     }
+}
+
+
+int main() {
+    cin >> n;
+    Init();
+    Simulate();
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
